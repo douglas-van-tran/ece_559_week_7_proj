@@ -1,0 +1,18 @@
+[project]
+name = "ece-559-week-7-proj"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Douglas Van Tran", email = "douglastran89@outlook.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "ipython>=9.13.0",
+    "matplotlib>=3.10.9",
+    "numpy>=2.4.6",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.16,<0.12.0"]
+build-backend = "uv_build"
