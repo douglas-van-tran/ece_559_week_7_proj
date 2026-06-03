@@ -95,59 +95,85 @@ def main():
     # ---------------------------------------------------------------------------------------------------
 
     f1, s1, f1_vpp, s1_vpp = scenario_1.calculate_p_feed()
-    peak_red_1 = scenario_1.calculate_peak_reduction(s1, s1_vpp)
-    print("The parameters for scenario 1 are:")
-    print(f1, s1, f1_vpp, s1_vpp)
-    print(f"The peak reduction is {peak_red_1:.2f}")
+    f2 = f1
+    f2_vpp = f1_vpp
+    peak_red = scenario_1.calculate_peak_reduction(s1, s1_vpp)
+    i_1_no_vpp, v_drop_1_no_vpp = scenario_1.calcuate_i_v(f1)
+    i_1_vpp, v_drop_1_vpp = scenario_1.calcuate_i_v(f1_vpp)
 
-    f2, s2, f2_vpp, s2_vpp = scenario_2.calculate_p_feed()
-    peak_red_2 = scenario_2.calculate_peak_reduction(s2, s2_vpp, True)
-    print("The parameters for scenario 2 are:")
-    print(f2, s2, f2_vpp, s2_vpp)
-    print(f"The peak reduction is {peak_red_2:.2f}")
+    print("------------------------- PARAMETERS FOR SCENARIO 1 -------------------------\n")
+    print(f"The power for feeder 1 without vpp for scenario 1 is: {f1:.2f} MW")
+    print(f"The power for feeder 2 without vpp for scenario 1 is: {f2:.2f} MW")
+    print(f"The power for the substation without vpp for scenario 1 is: {s1:.2f} MW")
+    print()
+    print(f"The power for feeder 1 with vpp for scenario 1 is: {f1_vpp:.2f} MW")
+    print(f"The power for feeder 2 with vpp for scenario 1 is: {f2_vpp:.2f} MW")
+    print(f"The power for the substation with vpp for scenario 1 is: {s1_vpp:.2f} MW")
+    print()
+    print(f"The peak reduction for scenario 1 is {peak_red:.2f}%")
+    print()
+    print(f"The current without vpp for scenario 1 is: {i_1_no_vpp:.2f} A")
+    print(f"The current with vpp for scenario 1 is: {i_1_vpp:.2f} A")
+    print()
+    print(f"The voltage drop without vpp for scenario 1 is: {v_drop_1_no_vpp:.5f}%")
+    print(f"The voltage drop with vpp for scenario 1 is: {v_drop_1_vpp:.5f}%")
+    print()
 
-    f3, s3, f3_vpp, s3_vpp = scenario_3.calculate_p_feed()
+    f1, s1, f1_vpp, s1_vpp = scenario_2.calculate_p_feed()
+    f2 = f1
+    f2_vpp = f1_vpp
+    i_1_no_vpp, v_drop_1_no_vpp = scenario_2.calcuate_i_v(f1)
+    i_1_vpp, v_drop_1_vpp = scenario_2.calcuate_i_v(f1_vpp)
+    peak_red = scenario_2.calculate_peak_reduction(s1, s1_vpp, True)
+    print("------------------------- PARAMETERS FOR SCENARIO 2 -------------------------\n")
+    print(f"The power for feeder 1 without vpp for scenario 2 is: {f1:.2f} MW")
+    print(f"The power for feeder 2 without vpp for scenario 2 is: {f2:.2f} MW")
+    print(f"The power for the substation without vpp for scenario 2 is: {s1:.2f} MW")
+    print()
+    print(f"The power for feeder 1 with vpp for scenario 2 is: {f1_vpp:.2f} MW")
+    print(f"The power for feeder 2 with vpp for scenario 2 is: {f2_vpp:.2f} MW")
+    print(f"The power for the substation with vpp for scenario 2 is: {s1_vpp:.2f} MW")
+    print()
+    print(f"The peak reduction for scenario 2 is {peak_red:.2f}%")
+    print()
+    print(f"The current without vpp for scenario 1 is: {i_1_no_vpp:.2f} A")
+    print(f"The current with vpp for scenario 1 is: {i_1_vpp:.2f} A")
+    print()
+    print(f"The voltage drop without vpp for scenario 1 is: {v_drop_1_no_vpp:.5f}%")
+    print(f"The voltage drop with vpp for scenario 1 is: {v_drop_1_vpp:.5f}%")
+    print()
+
+    f1, s1, f1_vpp, s1_vpp = scenario_3.calculate_p_feed()
 
     # Adjust values based on the scenario
     transfer_load = 4
     scenario_3_p_ev_per_feeder = 1
-    f3 += transfer_load
-    s3 = f3
+    f1 += transfer_load
+    s1 = f1
+    f2 = 0
+    f1_vpp += transfer_load - scenario_3_p_ev_per_feeder
+    f2_vpp = 0
+    s1_vpp = f1_vpp
 
-    f3_vpp += transfer_load - scenario_3_p_ev_per_feeder
-    s3_vpp = f3_vpp
-
-    peak_red_3 = scenario_3.calculate_peak_reduction(s3, s3_vpp)
-    print("The parameters for scenario 3 are:")
-    print(f3, s3, f3_vpp, s3_vpp)
-    print(f"The peak reduction is {peak_red_3:.2f}")
-
-    print("\n")
-
-    # ---------------------------------------------------------------------------------------------------
-    # QUESTION 2
-    # ---------------------------------------------------------------------------------------------------
-
+    peak_red = scenario_3.calculate_peak_reduction(s1, s1_vpp)
     i_1_no_vpp, v_drop_1_no_vpp = scenario_1.calcuate_i_v(f1)
     i_1_vpp, v_drop_1_vpp = scenario_1.calcuate_i_v(f1_vpp)
-    print("The currents for scenario 1 are:")
-    print(i_1_no_vpp, i_1_vpp)
-    print("The voltages for scenario 1 are:")
-    print(v_drop_1_no_vpp, v_drop_1_vpp)
-
-    i_2_no_vpp, v_drop_2_no_vpp = scenario_2.calcuate_i_v(f2)
-    i_2_vpp, v_drop_2_vpp = scenario_2.calcuate_i_v(f2_vpp)
-    print("The currents for scenario 2 are:")
-    print(i_2_no_vpp, i_2_vpp)
-    print("The voltages for scenario 2 are:")
-    print(v_drop_2_no_vpp, v_drop_2_vpp)
-
-    i_3_no_vpp, v_drop_3_no_vpp = scenario_3.calcuate_i_v(f3)
-    i_3_vpp, v_drop_3_vpp = scenario_3.calcuate_i_v(f3_vpp)
-    print("The currents for scenario 3 are:")
-    print(i_3_no_vpp, i_3_vpp)
-    print("The voltages for scenario 3 are:")
-    print(v_drop_3_no_vpp, v_drop_3_vpp)
+    print("------------------------- PARAMETERS FOR SCENARIO 3 -------------------------\n")
+    print(f"The power for feeder 1 without vpp for scenario 2 is: {f1:.2f} MW")
+    print(f"The power for feeder 2 without vpp for scenario 2 is: {f2:.2f} MW")
+    print(f"The power for the substation without vpp for scenario 2 is: {s1:.2f} MW")
+    print()
+    print(f"The power for feeder 1 with vpp for scenario 2 is: {f1_vpp:.2f} MW")
+    print(f"The power for feeder 2 with vpp for scenario 2 is: {f2_vpp:.2f} MW")
+    print(f"The power for the substation with vpp for scenario 2 is: {s1_vpp:.2f} MW")
+    print()
+    print(f"The peak reduction for scenario 2 is {peak_red:.2f}%")
+    print()
+    print(f"The current without vpp for scenario 1 is: {i_1_no_vpp:.2f} A")
+    print(f"The current with vpp for scenario 1 is: {i_1_vpp:.2f} A")
+    print()
+    print(f"The voltage drop without vpp for scenario 1 is: {v_drop_1_no_vpp:.5f}%")
+    print(f"The voltage drop with vpp for scenario 1 is: {v_drop_1_vpp:.5f}%")
 
 
 if __name__ == "__main__":
